@@ -3,8 +3,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Habitat;
-use App\Form\HabitatForm;
+use App\Entity\Animal;
+use App\Form\AnimalForm;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,13 +13,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class HabitatController extends AbstractController
+class AnimalControllerController extends AbstractController
 {
-    #[Route('/admin/habitat/new', name: 'habitat_new')]
+    #[Route('/admin/animal/new', name: 'animal_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
-    $habitat = new Habitat();
-    $form = $this->createForm(HabitatForm::class, $habitat);
+    $animal = new Animal();
+    $form = $this->createForm(AnimalForm::class, $animal);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
@@ -27,19 +27,19 @@ class HabitatController extends AbstractController
         if ($imageFile) {
             $newFilename = uniqid().'.'.$imageFile->guessExtension();
             $imageFile->move($this->getParameter('habitats'), $newFilename);
-            $habitat->setImage($newFilename);
+            $animal->setImage($newFilename);
         }
 
-        $habitat->setCreatedAt(new \DateTime());
-        $habitat->setUpdatedAt(new DateTime());
-        $em->persist($habitat);
+        $animal->setCreatedAt(new \DateTime());
+        $animal->setUpdatedAt(new DateTime());
+        $em->persist($animal);
         $em->flush();
 
-        return $this->redirectToRoute('habitat_new');
+        return $this->redirectToRoute('animal_new');
     }
 
-    return $this->render('main/admin/addHabitat.html.twig', [
-        'habitatForm' => $form->createView(),
+    return $this->render('main/admin/add.html.twig', [
+        'AnimalForm' => $form->createView(),
     ]);
     }
 

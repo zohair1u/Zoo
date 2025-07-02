@@ -21,3 +21,4 @@ services:
 
 parameters:
     habitats: '%kernel.project_dir%/public/uploads/habitats'
+    animals: '%kernel.project_dir%/public/uploads/animals'
