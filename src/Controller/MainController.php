@@ -15,4 +15,10 @@ final class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    #[Route('/lol', name: 'app_main')]
+    public function index2(): Response
+    {
+        return $this->render('main/index.html.twig');
+    }
 }
