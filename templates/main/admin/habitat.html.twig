@@ -42,7 +42,7 @@
       <td>{{ habitat.updatedAt? habitat.updatedAt|date('d/m/Y H:i'): 'Non défini'}}</td>
       
 
-      {# <td><a href="{{ path('perso', {paramId: habitat.id}) }}" type="button" class="btn btn-info">Afficher</a>  {% if app.user %} <a href="{{ path('edit', {paramId: habitat.id}) }}" type="button" class="btn btn-warning">Modifier</a>  <a href="{{ path('supp', {paramId: habitat.id}) }}" type="button" class="btn btn-danger">Supprimer</a> {% endif %}</td> #}
+      <td><a href="{{ path('edit_habitat', {paramId: habitat.id}) }}" type="button" class="btn btn-warning">Modifier</a>  <a href="{{ path('supp_habitat', {paramId: habitat.id}) }}" type="button" class="btn btn-danger">Supprimer</a> </td>
       
     </tr>
 

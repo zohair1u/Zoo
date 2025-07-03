@@ -17,6 +17,11 @@ class HabitatForm extends AbstractType
         $builder
             ->add('nom')
             ->add('image', FileType::class, [
+                // ça régle le problème mais n'enregsitre plus la photo
+             'data_class' => null,
+             'required' => false,
+
+
              'constraints' => [
                   new File([
                      'mimeTypes' => ['image/jpeg', 'image/png'],
@@ -24,6 +29,7 @@ class HabitatForm extends AbstractType
                           ])
                               ],
             ])
+           
             ->add('description')
             ->add('Ajouter', SubmitType::class)
             
