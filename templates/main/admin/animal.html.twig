@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+
+    
+<div class="example-wrapper">
+     <h1>Liste des animaux</h1>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Image</th>
+      <th scope="col">Race</th>
+      <th scope="col">Etat</th>
+      <th scope="col">Habitat</th>      
+      <th scope="col">Date d'entrée</th>
+      <th scope="col">Dernière modification</th>
+      
+      <th scope="col">Action</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    
+   {% for animal in animals %}
+    <tr>
+
+    {# // loop.index pour avoir le ID directement d'un tableau : #}
+      <th>{{ animal.id }} </th>
+      <td> {{ animal.prenom }}</td>
+      <td>      <img width=200 src="\uploads\animals\{{ animal.image }}" alt="IMG_Habitat"> </td>
+      <td>{{ animal.race }}</td>
+      <td>{{ animal.etat }}</td>
+      <td>{{ animal.habitat.nom }}</td>
+
+      <td>{{ animal.createdAt? animal.createdAt|date('d/m/Y H:i'): 'Non défini'}}</td>
+      <td>{{ animal.updatedAt? animal.updatedAt|date('d/m/Y H:i'): 'Non défini'}}</td>
+      
+
+      {# <td><a href="{{ path('perso', {paramId: animal.id}) }}" type="button" class="btn btn-info">Afficher</a>  {% if app.user %} <a href="{{ path('edit', {paramId: animal.id}) }}" type="button" class="btn btn-warning">Modifier</a>  <a href="{{ path('supp', {paramId: animal.id}) }}" type="button" class="btn btn-danger">Supprimer</a> {% endif %}</td> #}
+      
+    </tr>
+
+    {% endfor %}
+
+  
+</div>
+
+  
+{% endblock %}
+
+
+{# RESTE A FAIRE : 
+
+- Ajouter un Bouton Ajouter pour envoyer vers AJOUTER Animal.
+- Terminer la colonne ACTION (CRUD) #}

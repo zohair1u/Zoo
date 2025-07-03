@@ -47,4 +47,15 @@ class HabitatController extends AbstractController
     ]);
     }
 
+
+    #[Route('/admin/habitat', name: 'habitat_admin')]
+  public function sqlavancee(EntityManagerInterface $em): Response
+    {
+        $listHabitats = $em->getRepository(Habitat::class)->findAll();
+
+        return $this->render('main/admin/habitat.html.twig', [
+            "habitats" => $listHabitats
+        ]);
+    }
+
 }

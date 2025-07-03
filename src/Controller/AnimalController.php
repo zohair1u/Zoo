@@ -26,7 +26,7 @@ class AnimalController extends AbstractController
         $imageFile = $form->get('image')->getData();
         if ($imageFile) {
             $newFilename = uniqid().'.'.$imageFile->guessExtension();
-            $imageFile->move($this->getParameter('habitats'), $newFilename);
+            $imageFile->move($this->getParameter('animals'), $newFilename);
             $animal->setImage($newFilename);
         }
 
@@ -45,6 +45,17 @@ class AnimalController extends AbstractController
     return $this->render('main/admin/addAnimal.html.twig', [
         'animalForm' => $form->createView(),
     ]);
+    }
+
+
+    #[Route('/admin/animal', name: 'animal_admin')]
+  public function sqlavancee(EntityManagerInterface $em): Response
+    {
+        $listAnimals = $em->getRepository(Animal::class)->findAll();
+
+        return $this->render('main/admin/animal.html.twig', [
+            "animals" => $listAnimals
+        ]);
     }
 
 }
