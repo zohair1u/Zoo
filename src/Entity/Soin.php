@@ -25,8 +25,8 @@ class Soin
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
-    #[ORM\Column]
-    private ?\DateTime $updatedAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private?\DateTime $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'soins')]
     private ?Animal $animal = null;
@@ -92,7 +92,7 @@ class Soin
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): static
+    public function setUpdatedAt(?\DateTime $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 

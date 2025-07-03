@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class AnimalControllerController extends AbstractController
+class AnimalController extends AbstractController
 {
     #[Route('/admin/animal/new', name: 'animal_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
@@ -31,15 +31,19 @@ class AnimalControllerController extends AbstractController
         }
 
         $animal->setCreatedAt(new \DateTime());
-        $animal->setUpdatedAt(new DateTime());
+        $animal->setUpdatedAt(null);
+
         $em->persist($animal);
         $em->flush();
+
+
+        $this->addFlash('success', 'Animal a bien été enregistré.');
 
         return $this->redirectToRoute('animal_new');
     }
 
-    return $this->render('main/admin/add.html.twig', [
-        'AnimalForm' => $form->createView(),
+    return $this->render('main/admin/addAnimal.html.twig', [
+        'animalForm' => $form->createView(),
     ]);
     }
 

@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Animal;
 use App\Entity\Habitat;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,12 +18,19 @@ class AnimalForm extends AbstractType
     {
         $builder
             ->add('prenom')
-            ->add('image')
+            ->add('image', FileType::class, [
+             'constraints' => [
+                  new File([
+                     'mimeTypes' => ['image/jpeg', 'image/png'],
+                     'mimeTypesMessage' => 'Veuillez uploader une image valide.',
+                          ])
+                              ],
+            ])
             ->add('race')
             ->add('etat')
             ->add('habitat', EntityType::class, [
                 'class' => Habitat::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('Ajouter', SubmitType::class)
 

@@ -28,8 +28,8 @@ class Habitat
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
-    #[ORM\Column]
-    private ?\DateTime $updatedAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private?\DateTime $updatedAt = null;
 
     /**
      * @var Collection<int, Animal>
@@ -100,7 +100,7 @@ class Habitat
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): static
+    public function setUpdatedAt(?\DateTime $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 

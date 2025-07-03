@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Habitat;
-// use PHPUnit\TextUI\Configuration\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\AbstractType;
@@ -19,16 +18,15 @@ class HabitatForm extends AbstractType
             ->add('nom')
             ->add('image', FileType::class, [
              'constraints' => [
-             new File([
-            'mimeTypes' => ['image/jpeg', 'image/png'],
-            'mimeTypesMessage' => 'Veuillez uploader une image valide.',
-             ])
-             ],
-                ])
+                  new File([
+                     'mimeTypes' => ['image/jpeg', 'image/png'],
+                     'mimeTypesMessage' => 'Veuillez uploader une image valide.',
+                          ])
+                              ],
+            ])
             ->add('description')
             ->add('Ajouter', SubmitType::class)
-            // ->add('createdAt')
-            // ->add('updatedAt')
+            
         ;
     }
 

@@ -8,12 +8,18 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
 <div class="example-wrapper">
     <h1>Ajouter Habitat</h1>
 
-        {{ form_start(habitatForm) }}
+        {{ form_start(animalForm) }}
 
-        {{ form_end(habitatForm) }}
+        {{ form_end(animalForm) }}
+
+
 
 
   

@@ -31,9 +31,13 @@ class HabitatController extends AbstractController
         }
 
         $habitat->setCreatedAt(new \DateTime());
-        $habitat->setUpdatedAt(new DateTime());
+        $habitat->setUpdatedAt(null);
+
         $em->persist($habitat);
         $em->flush();
+
+
+        $this->addFlash('success', 'Habitat a bien été enregistré.');
 
         return $this->redirectToRoute('habitat_new');
     }
