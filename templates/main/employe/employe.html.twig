@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+{# /* <style> */ #}
+    {# /* .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; } */
+    /* .example-wrapper code { background: #F5F5F5; padding: 2px 6px; } */
+/* </style> */  #}
+
+<div class="example-wrapper">
+    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Users/info/OneDrive/Bureau/Projet ZOO/Zoo/zoo/src/Controller/MainController.php</code></li>
+        <li>Your template at <code>C:/Users/info/OneDrive/Bureau/Projet ZOO/Zoo/zoo/templates/main/index.html.twig</code></li>
+    </ul>
+</div>
+{% endblock %}
+
+
+{# // Créer un controller pour chaque ROLE pour gérer le vet et l'employée ! 
+
+L'idée et de sélectionner l'animal en premier puis on aura sa fiche et la possibilité de modifier les informations ! 
+Employé et Vet non-pas les mêmes informations à saisiir !
+L'employé peut voir ce que le Vet vient de saisir par rapport à un animal X #}
