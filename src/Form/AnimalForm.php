@@ -19,6 +19,8 @@ class AnimalForm extends AbstractType
         $builder
             ->add('prenom')
             ->add('image', FileType::class, [
+             'data_class' => null,
+             'required' => false,
              'constraints' => [
                   new File([
                      'mimeTypes' => ['image/jpeg', 'image/png'],

@@ -58,7 +58,9 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    public function editContact(Request $request, EntityManagerInterface $em, int $paramId)
+
+    #[Route('/admin/animal/edit/{paramId}', name: 'edit_animal')]
+    public function editAnimal(Request $request, EntityManagerInterface $em, int $paramId)
     {
     // Récupération de l'objet à modifier
     $item = $em->getRepository(Animal::class)->find($paramId);
@@ -73,28 +75,48 @@ class AnimalController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
         // Mise à jour de la BD
+        $imageFile = $form->get('image')->getData();
+
+        if ($imageFile) {
+               $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+               $imageFile->move(
+                    $this->getParameter('animals'),
+                    $newFilename
+                );
+
+        // Met à jour l'entité avec le nouveau nom de fichier
+        $item->setImage($newFilename);
+        } else {
+        // Ne rien faire: on garde l'image existante
+        }
+
+        $item->setUpdatedAt(new \DateTime());
         $em->flush();
 
         // Pour le message de modification
-        $this->addFlash('success', 'Contact modifié avec succès');
+        $this->addFlash('edited', 'Animal modifié avec succès');
 
         // Redirection vers la page des contacts
         return $this->redirectToRoute("animal_admin");
     }
 
     return $this->render('main/admin/editAnimal.html.twig', [
-        'formAdd' => $form,
+        'formEdit' => $form->createView(),
     ]);
 }
 
-    #[Route('/supp/{paramId}', name: 'supp')]
+    #[Route('amdin/animal/supp/{paramId}', name: 'supp_animal')]
     public function supp(EntityManagerInterface $em, $paramId)
     {
-        $contactSupp = $em->getRepository(Animal::class)->find($paramId);
-        $em->remove($contactSupp);
+        $animalSupp = $em->getRepository(Animal::class)->find($paramId);
+        $em->remove($animalSupp);
         $em->flush();
 
-        return $this->redirectToRoute('contact');
+
+        // Pour le message de deleted 
+        $this->addFlash('deleted', 'Animal supprimé avec succès');
+        return $this->redirectToRoute('animal_admin');
 
     }
 

@@ -74,11 +74,27 @@ class HabitatController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
         // Mise à jour de la BD
+        $imageFile = $form->get('image')->getData();
+
+        if ($imageFile) {
+               $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+               $imageFile->move(
+                    $this->getParameter('habitats'),
+                    $newFilename
+                );
+
+        // Met à jour l'entité avec le nouveau nom de fichier
+        $item->setImage($newFilename);
+        } else {
+        // Ne rien faire: on garde l'image existante
+        }
+
         $item->setUpdatedAt(new \DateTime());
         $em->flush();
 
         // Pour le message de modification
-        $this->addFlash('success', 'Habitat modifié avec succès');
+        $this->addFlash('edited', 'Habitat modifié avec succès');
 
         // Redirection vers la page des contacts
         return $this->redirectToRoute("habitat_admin");
@@ -89,12 +105,20 @@ class HabitatController extends AbstractController
     ]);
 }
 
+
+
+
+
     #[Route('/admin/habitat/supp/{paramId}', name: 'supp_habitat')]
     public function suppHabitat(EntityManagerInterface $em, $paramId)
     {
         $habitatSupp = $em->getRepository(Habitat::class)->find($paramId);
         $em->remove($habitatSupp);
         $em->flush();
+
+
+        // Pour le message de deleted 
+        $this->addFlash('deleted', 'Habitat supprimé avec succès');
 
         return $this->redirectToRoute('habitat_admin');
 

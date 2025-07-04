@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Habitats{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
+  {% set flashTypes = ['deleted', 'edited'] %}
+    {% for type in flashTypes %}
+        {% for message in app.flashes(type) %}
+            <div class="alert alert-success">
+                {{ message}}
+            </div>
+        {% endfor %}
+  {% endfor %}
 
 <div class="example-wrapper">
      <h1>Liste des habitats</h1>
@@ -31,19 +35,17 @@
     
    {% for habitat in habitats %}
     <tr>
-
-    {# // loop.index pour avoir le ID directement d'un tableau : #}
       <th>{{ habitat.id }} </th>
-      <td> {{ habitat.nom }}</td>
-      <td>      <img width=200 src="\uploads\habitats\{{ habitat.image }}" alt="IMG_Habitat"> </td>
+      <td>{{ habitat.nom }}</td>
+      <td><img width=200 src="\uploads\habitats\{{ habitat.image }}" alt="IMG_Habitat"> </td>
       <td>{{ habitat.description }}</td>
-
       <td>{{ habitat.createdAt? habitat.createdAt|date('d/m/Y H:i'): 'Non défini'}}</td>
       <td>{{ habitat.updatedAt? habitat.updatedAt|date('d/m/Y H:i'): 'Non défini'}}</td>
-      
-
-      <td><a href="{{ path('edit_habitat', {paramId: habitat.id}) }}" type="button" class="btn btn-warning">Modifier</a>  <a href="{{ path('supp_habitat', {paramId: habitat.id}) }}" type="button" class="btn btn-danger">Supprimer</a> </td>
-      
+      <td> <a href="{{ path('edit_habitat', {paramId: habitat.id}) }}" type="button" class="btn btn-warning">Modifier</a>  
+      <a href="{{ path('supp_habitat', {paramId: habitat.id})}}"
+      class="btn btn-danger"
+      onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet habitat?');">
+      Supprimer</a></td>  
     </tr>
 
     {% endfor %}
@@ -51,10 +53,12 @@
   
 </div>
 
+<div>
+
+<h4>Pour rajouter un nouveau HABITAT <a href="{{ path('habitat_new') }}">Cliquez-ici</a></h4>
+
+</div>
+
   
 {% endblock %}
 
-{# RESTE A FAIRE : 
-
-- Ajouter un Bouton Ajouter pour envoyer vers AJOUTER HABITAT.
-- Terminer la colonne ACTION (CRUD) #}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}🛠 Dashboard{% endblock %}
+
+{% block body %}
+
+<style>
+.dashboard-welcome {
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    border-left: 5px solid #007bff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.dashboard-welcome h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.6rem;
+}
+
+.dashboard-welcome p {
+    margin: 10px 0;
+    color: #34495e;
+    font-size: 1rem;
+}
+
+.dashboard-links {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.dashboard-links li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #007bff;
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+}
+
+.dashboard-links li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #28a745;
+}
+
+a{
+    text-decoration: none;
+}
+</style>
+
+<div class="dashboard-welcome">
+    <h2>Bienvenue sur votre tableau de bord administrateur</h2>
+    <p>Vous êtes actuellement sur le <strong>dashboard d'administration</strong> du site.</p>
+    <p>Depuis cette interface, vous pouvez accéder aux sections suivantes pour gérer les informations:</p>
+    <ul class="dashboard-links">
+        <li><a href="{{path('habitat_admin')}}">🏡 Modifier les <strong>habitats</strong></a></li>
+        <li><a href="{{path('animal_admin')}}">🐾 Gérer les <strong>animaux</strong></a></li>
+        <li><a href="">👥 Administrer les <strong>employés</strong></a></li>
+    </ul>
+    <p>Bonne gestion!</p>
+</div>
+
+
+{% endblock %}
