@@ -1,20 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}🐊 Zoo 🐊{% endblock %}
+{% block style %}
+<style>
+.animal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2em;
+    padding: 2em;
+}
 
-{% block body %}
-{# /* <style> */ #}
-    {# /* .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; } */
-    /* .example-wrapper code { background: #F5F5F5; padding: 2px 6px; } */
-/* </style> */  #}
+.animal-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
 
-<div class="example-wrapper">
-    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
+.animal-card:hover {
+    transform: translateY(-5px);
+}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/info/OneDrive/Bureau/Projet ZOO/Zoo/zoo/src/Controller/MainController.php</code></li>
-        <li>Your template at <code>C:/Users/info/OneDrive/Bureau/Projet ZOO/Zoo/zoo/templates/main/index.html.twig</code></li>
-    </ul>
+.animal-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.animal-info {
+    padding: 1em;
+}
+
+.animal-info h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #2d3e50;
+}
+</style>
+<link href="{{ asset('assets/styles/styleIndex.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block index %}
+<div>
+    <h1>ZOO</h1>
+    <h2>Découvrez notre nouveau ZOO entiérement écologique </h2>
 </div>
+
+<section class='habitat'>
+ <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for i in 1..4 %}
+            <div class="carousel-item {{ i == 1 ? 'active' }}">
+                <img src="\uploads\animals\{{i}}.png" class="d-block w-100" alt="...">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </div>
+</section>
+
+
+{# <section class='animaux'> #}
+    <h2>NOS AMIS LES ANIMAUX</h2>
+
+    <div class="animal-cards">
+    {% for animal in animals %}
+        <div class="animal-card">
+            <img src="{{ asset('uploads/animals/' ~ animal.image)}}" alt="{{ animal.prenom}}">
+            <div class="animal-info">
+                <h2>{{ animal.prenom}}</h2>
+                <p><strong>Race:</strong> {{ animal.race}}</p>
+                <p><strong>Habitat:</strong> {{ animal.habitat.nom}}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>       
+
+
+{# </section> #}
+
+
+
+
+{% block script %}
+    {# // <script src="{{ asset('appIndex.js') }}"></> #}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+{% endblock %}
+
 {% endblock %}

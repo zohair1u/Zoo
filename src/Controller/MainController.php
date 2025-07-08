@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Animal;
+use App\Entity\Habitat;
 use App\Entity\User;
 use App\Form\UserTypeForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,9 +17,17 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class MainController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function indexHome(): Response
+    public function indexHome(EntityManagerInterface $em): Response
     {
-        return $this->render('\main\index.html.twig');
+
+         $listAnimals = $em->getRepository(Animal::class)->findAll();
+         $listHabitats = $em->getRepository(Habitat::class)->findAll();
+
+        return $this->render('\main\index.html.twig', [
+            "animals" => $listAnimals,
+            "habitats" => $listHabitats
+        ]);
+
     }
 
     #[Route('/admin/users', name: 'users')]
