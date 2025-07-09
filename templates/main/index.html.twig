@@ -2,58 +2,25 @@
 
 {% block title %}🐊 Zoo 🐊{% endblock %}
 {% block style %}
-<style>
-.animal-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2em;
-    padding: 2em;
-}
-
-.animal-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.animal-card:hover {
-    transform: translateY(-5px);
-}
-
-.animal-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.animal-info {
-    padding: 1em;
-}
-
-.animal-info h2 {
-    margin-top: 0;
-    font-size: 1.5em;
-    color: #2d3e50;
-}
-</style>
-<link href="{{ asset('assets/styles/styleIndex.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/styleIndex.css')}}">
 {% endblock %}
 
 {% block index %}
-<div>
-    <h1>ZOO</h1>
-    <h2>Découvrez notre nouveau ZOO entiérement écologique </h2>
+<div class="zoo-header">
+  <h1>ZOO</h1>
+  <h2>Découvrez notre nouveau ZOO entièrement écologique</h2>
 </div>
 
-<section class='habitat'>
- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<section class="habitat">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            {% for i in 1..4 %}
-            <div class="carousel-item {{ i == 1 ? 'active' }}">
-                <img src="\uploads\animals\{{i}}.png" class="d-block w-100" alt="...">
-            </div>
+            {% for habitat in habitats %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <img src="\uploads\habitats\{{ habitat.image }}" class="d-block w-100" alt="{{ habitat.nom}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ habitat.nom}}</h5>
+                    </div>
+                </div>
             {% endfor %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -65,12 +32,16 @@
             <span class="visually-hidden">Suivant</span>
         </button>
     </div>
+
+    <div class="habitat-button-container">
+         <a href="{{path('habitats')}}" class="btn-ecologie caroussel-habitat">Voir les habitats</a>
+    </div>
 </section>
 
+<div class="separateur"></div>
 
-{# <section class='animaux'> #}
-    <h2>NOS AMIS LES ANIMAUX</h2>
-
+<section class='animaux'>
+    <h2 class="amis-les-animaux">NOS AMIS LES ANIMAUX</h2>
     <div class="animal-cards">
     {% for animal in animals %}
         <div class="animal-card">
@@ -82,17 +53,51 @@
             </div>
         </div>
     {% endfor %}
-    </div>       
+    </div>   
+
+    <div class="habitat-button-container">
+         <a href="{{path('animals')}}" class="btn-ecologie caroussel-habitat">Plus d'amis</a>
+    </div>    
+</section>
+
+<div class="separateur"></div>
+
+<section class="service">
+
+    <div class="services">
+        <h2 class="service-titre">Nos Services</h2>
+        <div class="service-cards">
+        <div class="service-card">
+            <img src="https://picsum.photos/200/300?random=1" alt="Petit Train">
+            <h2>Petit Train</h2>
+            <p>Découvrez notre petit train qui vous emmène à travers le zoo pour une visite guidée inoubliable !</p>
+        </div>
+        <div class="service-card">
+            <img src="https://picsum.photos/200/300?random=2" alt="Balades">
+            <h2>Balades</h2>
+            <p>Promenez-vous à travers les différents habitats de nos animaux et découvrez leur monde fascinant !</p>
+        </div>
+        <div class="service-card">
+            <img src="https://picsum.photos/200/300?random=3" alt="Spectacles">
+            <h2>Spectacles</h2>
+            <p>Assistez à nos spectacles d'animaux pour une expérience unique et inoubliable !</p>
+        </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="separateur"></div>
+
+<section class="avis">
 
 
-{# </section> #}
 
-
-
+</section>
 
 {% block script %}
-    {# // <script src="{{ asset('appIndex.js') }}"></> #}
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/appIndex.js') }}"></>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% endblock %}

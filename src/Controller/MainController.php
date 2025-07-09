@@ -62,6 +62,33 @@ final class MainController extends AbstractController
         return $this->render('main/admin/dashboard.html.twig');
     }
 
+//Redirection vers la pages des habitats : 
+    #[Route('/habitats', name: 'habitats')]
+    public function indexHabitat(EntityManagerInterface $em): Response
+    {
+
+         $listHabitats = $em->getRepository(Habitat::class)->findAll();
+
+        return $this->render('\main\habitat.html.twig', [
+            "habitats" => $listHabitats
+        ]);
+
+    }
+
+// Redirection vers la page des animaux : 
+    #[Route('/animals', name: 'animals')]
+    public function indexAnimal(EntityManagerInterface $em): Response
+    {
+
+         $listAnimals = $em->getRepository(Animal::class)->findAll();
+
+        return $this->render('\main\animal.html.twig', [
+            "animals" => $listAnimals
+        ]);
+
+    }    
+
+
 //Redirection en fonction de type de l'utilisateur :
     #[Route('/apres-connexion', name: 'apres_connexion')]
     public function redirectionPostLogin(): Response
