@@ -75,19 +75,24 @@ final class MainController extends AbstractController
 
     }
 
-// Redirection vers la page des animaux : 
-    #[Route('/animals', name: 'animals')]
-    public function indexAnimal(EntityManagerInterface $em): Response
+// Redirection vers la page d'un habitat avec les animaux concernés : 
+
+    #[Route('/animals/{id}', name: 'animals')]
+    public function indexAnimal(EntityManagerInterface $em, $id): Response
     {
+        $habitat = $em->getRepository(Habitat::class)->find($id);
 
-         $listAnimals = $em->getRepository(Animal::class)->findAll();
+        if (!$habitat) {
+            throw $this->createNotFoundException('Habitat non trouvé.');
+    }
 
-        return $this->render('\main\animal.html.twig', [
-            "animals" => $listAnimals
+        $listAnimals = $habitat->getAnimals(); // ✅ Accès direct via la relation
+
+        return $this->render('main/animal.html.twig', [
+            'animals' => $listAnimals,
+            'habitat' => $habitat,
         ]);
-
-    }    
-
+    } 
 
 //Redirection en fonction de type de l'utilisateur :
     #[Route('/apres-connexion', name: 'apres_connexion')]
