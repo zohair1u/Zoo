@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-success bg-opacity-75 shadow-sm">
   <div class="container">
-    <a class="navbar-brand text-white fw-bold" href="{{ path('home')}}">🐊 ZOO</a>
+    <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="{{ path('home')}}">
+    {# le logo ne veut pas prendre du CSS  #}
+      {# <img src="{{ asset('images/logo-zoo.png')}}" alt="Logo Zoo" class="logo-zoo"> #} 
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
       aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,19 +15,38 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="{{ path('habitats')}}">Découvrir les habitats</a>
         </li>
+
         {% if not app.user %}
           <li class="nav-item">
-              <a class="nav-link text-white" href="#">Contact</a>
+            <a class="nav-link text-white" href="#">Contact</a>
+          </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path('dashboard')}}">Espace Admin</a>
+          </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_EMPLOYE') %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path('employe_tools')}}">Espace Employé</a>
+          </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_VETERINAIRE') %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path('veto_portail')}}">Portail Vétérinaire</a>
           </li>
         {% endif %}
       </ul>
 
       <div class="d-flex">
-          {% if app.user %}
-              <a href="{{ path('app_logout')}}" class="btn btn-outline-light">Se déconnecter</a>
-          {% else %}
-              <a href="{{ path('app_login')}}" class="btn btn-outline-light">Se connecter</a>
-          {% endif %}
+        {% if app.user %}
+          <a href="{{ path('app_logout')}}" class="btn btn-outline-light">Se déconnecter</a>
+        {% else %}
+          <a href="{{ path('app_login')}}" class="btn btn-outline-light">Se connecter</a>
+        {% endif %}
       </div>
     </div>
   </div>
