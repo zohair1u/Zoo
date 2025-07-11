@@ -86,7 +86,7 @@ final class MainController extends AbstractController
             throw $this->createNotFoundException('Habitat non trouvé.');
     }
 
-        $listAnimals = $habitat->getAnimals(); // ✅ Accès direct via la relation
+        $listAnimals = $habitat->getAnimals(); // Accès direct via la relation
 
         return $this->render('main/animal.html.twig', [
             'animals' => $listAnimals,
