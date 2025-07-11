@@ -47,7 +47,12 @@
         {% else %}
           <a href="{{ path('app_login')}}" class="btn btn-outline-light">Se connecter</a>
         {% endif %}
+
+        <button id="toggle-darkmode" class="btn btn-sm bg-transparent border-0" title="Mode sombre">
+          <img id="icon-darkmode" src="{{ asset('images/moon-icon.png')}}" alt="Activer le mode sombre" width="24" height="24">
+        </button>
       </div>
     </div>
+
   </div>
 </nav>
