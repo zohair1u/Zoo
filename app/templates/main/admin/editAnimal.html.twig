@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Modification Animal{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/styleForm.css')}}">
+{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Modifier Animal</h1>
+<div class="ajouter">
+    <h1 class='ajout'>Modifier Animal</h1>
 
     {{ form_start(formEdit)}}
         {{ form_row(formEdit.prenom) }}

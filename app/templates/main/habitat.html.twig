@@ -15,7 +15,7 @@
 
   <div class="habitat-grid">
     {% for habitat in habitats %}
-      <a href="{{ path('habitats', { id: habitat.id})}}" class="habitat-card">
+      <a href="{{ path('animals', { id: habitat.id})}}" class="habitat-card">
       <div class="habitat-image" style="background-image: url('{{ asset('uploads/habitats/' ~ habitat.image)}}');"></div>
       <div class="habitat-name">{{ habitat.nom}}</div>
       </a>
