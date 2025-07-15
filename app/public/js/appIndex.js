@@ -1,3 +1,5 @@
+// Caroussel Page d'ACCUEIL :
+
 document.addEventListener('DOMContentLoaded', () => {
     const track = document.querySelector('.carousel-track');
     const prevBtn = document.querySelector('.carousel-btn.prev');
@@ -55,23 +57,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// DARK MODE : 
-
-  const toggleButton = document.getElementById('toggle-darkmode');
-  const icon = document.getElementById('icon-darkmode');
-
-  // Appliquer le mode selon localStorage
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    icon.src = '/images/sun-icon.png';
-    icon.alt = 'Activer le mode clair';
-}
-
-  toggleButton.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDark? 'dark': 'light');
-
-    icon.src = isDark? '/images/sun-icon.png': '/images/moon-icon.png';
-    icon.alt = isDark? 'Activer le mode clair': 'Activer le mode sombre';
-});
