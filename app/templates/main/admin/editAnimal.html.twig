@@ -6,28 +6,31 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
 
-<div class="ajouter">
-    <h1 class='ajout'>Modifier Animal</h1>
+    <div class="ajouter">
+        <h1 class='ajout'>Modifier Animal</h1>
 
-    {{ form_start(formEdit)}}
-        {{ form_row(formEdit.prenom) }}
-        {{ form_row(formEdit.image, {
-            attr: {'required': 'required'},
-            label: 'Image'
-            })
-        }}
-        {{ form_row(formEdit.race) }}
-        {{ form_row(formEdit.etat) }}
-        {{ form_row(formEdit.habitat) }}
-        {{ form_row(formEdit.Ajouter, {
-            label: 'Appliquer la modification'
-            })
-        }}
-    {{ form_end(formEdit)}}  
-</div>
+        {{ form_start(formEdit)}}
+            {{ form_row(formEdit.prenom) }}
+            {{ form_row(formEdit.image, {
+                attr: {'required': 'required'},
+                label: 'Image'
+                })
+            }}
+            {{ form_row(formEdit.race) }}
+            {{ form_row(formEdit.etat) }}
+            {{ form_row(formEdit.habitat) }}
+            {{ form_row(formEdit.Ajouter, {
+                label: 'Appliquer la modification'
+                })
+            }}
+        {{ form_end(formEdit)}}  
+    </div>
 
-<div>
-    <h3>Retour vers la liste des animaux par <a href="{{ path('animal_admin') }}">ici</a></h3>
-</div>
+    <div>
+        <h3>Retour vers la liste des animaux par <a href="{{ path('animal_admin') }}">ici</a></h3>
+    </div>
+
+</div>    
 {% endblock %}

@@ -6,28 +6,33 @@
 {% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+<div class="container">
 
-<div class="ajouter">
-    <h1 class='ajout'>Ajouter Animal</h1>
 
-    {{ form_start(animalForm)}}
-        {{ form_row(animalForm.prenom) }}
-        {{ form_row(animalForm.image, {
-            attr: {'required': 'required'},
-            label: 'Image'
-            })
-        }}
-        {{ form_row(animalForm.race) }}
-        {{ form_row(animalForm.etat) }}
-        {{ form_row(animalForm.habitat) }}
-        {{ form_row(animalForm.Ajouter, {
-            label: 'Ajouter Animal'
-            })
-        }}
-    {{ form_end(animalForm)}}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
 
-</div>
+    <div class="ajouter">
+        <h1 class='ajout'>Ajouter Animal</h1>
+
+        {{ form_start(animalForm)}}
+            {{ form_row(animalForm.prenom) }}
+            {{ form_row(animalForm.image, {
+                attr: {'required': 'required'},
+                label: 'Image'
+                })
+            }}
+            {{ form_row(animalForm.race) }}
+            {{ form_row(animalForm.etat) }}
+            {{ form_row(animalForm.habitat) }}
+            {{ form_row(animalForm.Ajouter, {
+                label: 'Ajouter Animal'
+                })
+            }}
+        {{ form_end(animalForm)}}
+
+    </div>
+
+</div>    
 {% endblock %}

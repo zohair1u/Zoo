@@ -1,3 +1,15 @@
+/* LOGO */
+
+.logo-zoo {
+  width: 60px;             
+  height: 60px;
+  border-radius: 50%;      
+  object-fit: cover;
+  background-color: #53A57F;  
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 /* FOOTER */
 
 .zoo-footer {

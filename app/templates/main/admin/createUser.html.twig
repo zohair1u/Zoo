@@ -7,16 +7,21 @@
 
 {% block body %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+<div class="container">
 
-<div class="ajouter">
-    <h1 class='ajout'>Ajouter un utilisateur</h1>
 
-    {{ form_start(form)}}
-        
-    {{ form_end(form)}}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
 
-</div>
+    <div class="ajouter">
+        <h1 class='ajout'>Ajouter un utilisateur</h1>
+
+        {{ form_start(form)}}
+            
+        {{ form_end(form)}}
+
+    </div>
+
+</div>    
 {% endblock %}
