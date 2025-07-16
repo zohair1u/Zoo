@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h1>Laissez votre avis</h1>
+
+{{ form_start(form)}}
+    {{ form_row(form.username)}}
+    {{ form_row(form.note)}}
+    {{ form_row(form.message)}}
+    <button type="submit">Envoyer</button>
+{{ form_end(form)}}
+
+<hr>
+
+<h2>Avis des visiteurs</h2>
+{% for a in avis %}
+    <div>
+        <strong>{{ a.username}}</strong> - ⭐ {{ a.note}}/5<br>
+        <em>{{ a.message}}</em><br>
+        <small>{{ a.createdAt|date('d/m/Y H:i')}}</small>
+    </div>
+    <hr>
+{% else %}
+    <p>Aucun avis pour le moment.</p>
+{% endfor %}
+
+
+
+
+
+{% endblock %}

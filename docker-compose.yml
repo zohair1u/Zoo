@@ -36,4 +36,10 @@ services:
       UPLOAD_LIMIT: 20M
     ports:
       - 8899:80
-      
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+    volumes:
+      - ./mongodb:/data/db    
