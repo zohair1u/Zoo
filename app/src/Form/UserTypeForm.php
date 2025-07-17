@@ -19,14 +19,17 @@ class UserTypeForm extends AbstractType
             ->add('email', EmailType::class)
             ->add('roles', ChoiceType::class, [
             'choices' => [
-            'Administrateur' => 'ROLE_ADMIN',
-            'Employé' => 'ROLE_EMPLOYE',
-            'Vétérinaire' => 'ROLE_VETERINAIRE',
-             ],
-            //  'expanded' => false, 
+                'Administrateur' => 'ROLE_ADMIN',
+                'Employé' => 'ROLE_EMPLOYE',
+                'Vétérinaire' => 'ROLE_VETERINAIRE',
+                ],
+             'expanded' => false, 
              'multiple' => true, 
              'label' => 'Rôle de l’utilisateur',
              ])
+
+             //  'expanded' => false, 
+             //'multiple' => true, 
 
             ->add('password', PasswordType::class)
             ->add('nom')

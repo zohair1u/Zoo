@@ -3,26 +3,24 @@
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-
-/**
- * @MongoDB\Document
- */
+// use Doctrine\ODM\MongoDB\Mapping\Attributes as MongoDB;
+#[MongoDB\Document]
 class Avis
 {
-    /** @MongoDB\Id */
-    private $id;
+    #[MongoDB\Id]
+    private?string $id = null;
 
-    /** @MongoDB\Field(type="string") */
-    private $username;
+    #[MongoDB\Field(type: 'string')]
+    private?string $username = null;
 
-    /** @MongoDB\Field(type="int") */
-    private $note;
+    #[MongoDB\Field(type: 'int')]
+    private?int $note = null;
 
-    /** @MongoDB\Field(type="string") */
-    private $message;
+    #[MongoDB\Field(type: 'string')]
+    private?string $message = null;
 
-    /** @MongoDB\Field(type="date") */
-    private $createdAt;
+    #[MongoDB\Field(type: 'date')]
+    private \DateTime $createdAt;
 
     public function __construct()
     {

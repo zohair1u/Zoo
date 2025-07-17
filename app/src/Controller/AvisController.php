@@ -26,14 +26,13 @@ class AvisController extends AbstractController
 
             $this->addFlash('success', 'Merci pour votre avis!');
             return $this->redirectToRoute('avis');
-}
+        }
 
         $listeAvis = $dm->getRepository(Avis::class)->findAll();
-
-        // findby([], ['createdAt' => 'DESC'])
-        return $this->render('avis/index.html.twig', [
+        
+        return $this->render('avis/avis.html.twig', [
             'form' => $form->createView(),
             'avis' => $listeAvis,
         ]);
-}
+    }
 }

@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block body %}
+
+            {% for message in app.flashes('successAvis') %}
+                <div class="popup-alert" id="popup-alert">
+                    {{ message}}
+                </div>
+            {% endfor %}
+
 <div class="zoo-header">
   <h1>ZOO</h1>
   <h2>Découvrez notre nouveau ZOO entièrement écologique</h2>
@@ -96,8 +103,38 @@
 
 <section class="avis">
 
+    <h2 class='avis-titre'>TEMOIGNAGES</h2>
 
+    <div class="avis-section">
+     <div class="avis-list">
+            {% for a in avis %}
+                <div class="avis-card">
+                    <h3>{{ a.username}}</h3>
+                    <div class="note">
+                        {% for i in 1..a.note %}
+                            ⭐
+                        {% endfor %}
+                    </div>
+                    <p>{{ a.message}}</p>
+                    <div class="date">{{ a.createdAt|date('d/m/Y')}}</div>
+                </div>
+            {% endfor %}
+        </div>
 
+        <div class="voir-tous-container">
+            <a href="{{ path('avis')}}" class="voir-tous-btn">Voir tous les avis</a>
+        </div>
+    
+        <div class="avis-form">
+            <h3 class="avis-intro">Laissez votre témoignage</h3>
+            {{ form_start(form)}}
+            {{ form_widget(form)}}
+            <button type="submit">Envoyer</button>
+            {{ form_end(form)}}
+        </div>   
+
+    </div>   
+   
 </section>
 
 {% block script %}

@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,16 +18,22 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'Votre nom',
+                'label' => 'Votre Nom :',
             ])
-            ->add('note', IntegerType::class, [
-                'label' => 'Note (1 à 5)',
-                'constraints' => [
-                    new Range(['min' => 1, 'max' => 5])
-                ]
+            ->add('note', ChoiceType::class, [
+                'label' => 'Note',
+                'choices' => [
+                    '⭐' => 1,
+                    '⭐⭐' => 2,
+                    '⭐⭐⭐' => 3,
+                    '⭐⭐⭐⭐' => 4,
+                    '⭐⭐⭐⭐⭐' => 5,
+                ],
+                'expanded' => true, // Affiche des boutons radio
+                'multiple' => false,
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Votre message',
+                'label' => 'Message',
             ]);
 }
 

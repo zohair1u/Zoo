@@ -5,10 +5,17 @@ namespace App\Controller;
 use App\Entity\Animal;
 use App\Entity\Habitat;
 use App\Entity\User;
+
+use App\Document\Avis;
+use App\Form\AvisType;
+use Doctrine\ODM\MongoDB\DocumentManager;
+
 use App\Form\UserTypeForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
@@ -17,15 +24,33 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class MainController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function indexHome(EntityManagerInterface $em): Response
+    public function indexHome(EntityManagerInterface $em,Request $request, DocumentManager $dm): Response
     {
 
          $listAnimals = $em->getRepository(Animal::class)->findAll();
          $listHabitats = $em->getRepository(Habitat::class)->findAll();
 
+         // Les avis : 
+        $avis = new Avis();
+        $form = $this->createForm(AvisType::class, $avis);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dm->persist($avis);
+            $dm->flush();
+
+            $this->addFlash('successAvis', 'Merci pour votre avis!');
+            return $this->redirectToRoute('home');
+        }
+
+        $listeAvis = $dm->getRepository(Avis::class)->findBy([], ['createdAt' => 'DESC'], 6);
+
         return $this->render('\main\index.html.twig', [
             "animals" => $listAnimals,
-            "habitats" => $listHabitats
+            "habitats" => $listHabitats,
+            'form' => $form->createView(),
+            'avis' => $listeAvis,
         ]);
 
     }

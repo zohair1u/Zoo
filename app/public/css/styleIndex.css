@@ -1,3 +1,28 @@
+/* Alerte Popup */
+.popup-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6bbf59;
+    color: white;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeInOut 4s ease forwards;
+}
+
+/* Animation d’apparition/disparition */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px);}
+    10% { opacity: 1; transform: translateY(0);}
+    90% { opacity: 1; transform: translateY(0);}
+    100% { opacity: 0; transform: translateY(-10px);}
+}
 
 /* les titres  */
 
@@ -20,7 +45,7 @@
   margin-top: 10px;
 }
 
-.amis-les-animaux, .service-titre {
+.amis-les-animaux, .service-titre, .avis-titre{
   text-align: center;
   font-size: 30px;
   font-weight: bold;
@@ -213,3 +238,153 @@
 .btn-contact:hover {
   background-color: #2E6E31;
 }
+
+/* AVIS */
+
+/* Section principale centrée */
+.avis-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f4f9f4;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Titre principal */
+.avis-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #4a9c3e;
+    margin-bottom: 2rem;
+}
+
+/* Formulaire centré */
+.avis-intro {
+    text-align: left;
+    font-size: 1.2rem;
+    color: #4a9c3e;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.avis-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.avis-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.avis-form input,
+.avis-form textarea,
+.avis-form select {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.8rem;
+    border: 1px solid #cce5cc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f4f9f4;
+}
+
+.avis-form button {
+    padding: 0.8rem 1.5rem;
+    background-color: #6bbf59;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.avis-form button:hover {
+    background-color: #4a9c3e;
+}
+
+/* Grille des avis */
+.avis-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Carte individuelle */
+.avis-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.avis-card:hover {
+    transform: translateY(-5px);
+}
+
+.avis-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #4a9c3e;
+}
+
+.avis-card.note {
+    font-size: 1.2rem;
+    color: #6bbf59;
+    margin: 0.5rem 0;
+}
+
+.avis-card p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.avis-card.date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+/* Bouton "Voir tous les avis" */
+.voir-tous-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.voir-tous-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #6bbf59;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.voir-tous-btn:hover {
+    background-color: #4a9c3e;
+}
+
+/* Responsive ajusté */
+@media (max-width: 600px) {
+.avis-form input,
+.avis-form textarea,
+.avis-form select {
+        max-width: 100%;
+}
+
+.avis-section h2 {
+        font-size: 1.5rem;
+}
+}
+
