@@ -120,6 +120,7 @@ final class MainController extends AbstractController
     } 
 
 //Redirection en fonction de type de l'utilisateur :
+
     #[Route('/apres-connexion', name: 'apres_connexion')]
     public function redirectionPostLogin(): Response
     {
@@ -134,7 +135,7 @@ final class MainController extends AbstractController
     }
 
         if (in_array('ROLE_VETERINAIRE', $user->getRoles(), true)) {
-            return $this->redirectToRoute('veterinaire_dashboard');
+            return $this->redirectToRoute('vet_dashboard');
     }
 
         return $this->redirectToRoute('homepage');

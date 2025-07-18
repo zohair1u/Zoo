@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+{% block style %}
+<style>
+/* 🌿 Conteneur principal */
+.vet-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 🧾 Titres */
+.vet-title {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.vet-subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* 🩺 Section formulaire */
+.vet-form-section {
+    background-color: #fdfdfd;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.vet-form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vet-form-section input,
+.vet-form-section textarea,
+.vet-form-section select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.vet-form-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* 🔘 Bouton */
+.vet-btn {
+    align-self: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vet-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 📋 Section historique */
+.vet-history-section {
+    margin-top: 20px;
+}
+
+.vet-soin-list {
+    list-style: none;
+    padding: 0;
+}
+
+.vet-soin-item {
+    background-color: #f9f9f9;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.vet-comment {
+    display: block;
+    margin-top: 5px;
+    font-style: italic;
+    color: #555;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+    <div class="vet-container">
+        <h1 class="vet-title">{{ animal.prenom}} - {{ animal.race}}</h1>
+
+        <section class="vet-form-section">
+            <h2 class="vet-subtitle">🩺 Ajouter un soin</h2>
+            {{ form_start(form)}}
+                {{ form_widget(form)}}
+                <button class="vet-btn">Ajouter</button>
+            {{ form_end(form)}}
+        </section>
+
+        <section class="vet-history-section">
+            <h2 class="vet-subtitle">📋 Historique des soins</h2>
+            <ul class="vet-soin-list">
+                {% for soin in soins %}
+                    <li class="vet-soin-item">
+                        <strong>{{ animal.prenom}}</strong> a reçu le soin <strong>{{ soin.soin}}</strong>
+                        le <em>{{ soin.dateSoin|date('d/m/Y H:i')}}</em><br>
+                        <span class="vet-comment">{{ soin.commentaires}}</span>
+                    </li>
+                {% else %}
+                    <li class="vet-soin-item">Aucun soin enregistré pour {{ animal.prenom}}.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+{% endblock %}
