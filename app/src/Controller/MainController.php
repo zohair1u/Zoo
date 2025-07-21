@@ -72,7 +72,7 @@ final class MainController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        $this->addFlash('success', 'Utilisateur créé avec succès.');
+        $this->addFlash('successAdmin', 'Utilisateur créé avec succès.');
         return $this->redirectToRoute('users');
     }
 

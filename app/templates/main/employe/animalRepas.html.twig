@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations Animal{% endblock %}
+
+{% block style %}
+<style>
+.fiche-animal-body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f8fa;
+    color: #333;
+    padding: 20px;
+}
+
+.fiche-animal-title,.fiche-animal-section-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #dcdcdc;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+.fiche-animal-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.fiche-animal-list li {
+    background-color: #ffffff;
+    border-left: 4px solid #3498db;
+    padding: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* FORMULAIRE */
+.fiche-animal-form {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.fiche-animal-form input,
+.fiche-animal-form textarea,
+.fiche-animal-form select {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fiche-animal-form button[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.fiche-animal-form button[type="submit"]:hover {
+    background-color: #219150;
+}
+
+/* TABLEAU HISTORIQUE */
+.fiche-animal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.fiche-animal-table th {
+    background-color: #ecf0f1;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.fiche-animal-table td {
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.fiche-animal-table tr:hover td {
+    background-color: #f1f8ff;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="fiche-animal-body">
+    <h2 class="fiche-animal-title">Fiche de {{ animal.prenom}}</h2>
+
+    <h3 class="fiche-animal-section-title">Instructions vétérinaire</h3>
+    <ul class="fiche-animal-list">
+    {% for soin in soins %}
+        <li>{{ soin.commentaires}} - {{ soin.dateSoin|date('d/m/Y')}}</li>
+    {% else %}
+        <li>Aucune fiche de soin</li>
+    {% endfor %}
+    </ul>
+
+    <h3 class="fiche-animal-section-title">Indiquer le repas</h3>
+    <div class="fiche-animal-form">
+        {{ form_start(form)}}
+            {{ form_widget(form)}}
+            <button type="submit">Enregistrer</button>
+        {{ form_end(form)}}
+    </div>
+
+    <h3 class="fiche-animal-section-title">Historique</h3>
+    <table class="fiche-animal-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Employé</th>
+                <th>Grammage (kg)</th>
+                <th>Commentaires</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for r in historique %}
+            <tr>
+                <td>{{ r.dateRepas|date('d/m/Y')}}</td>
+                <td>
+                    {% if r.user %}
+                        {{ r.user.nom}}
+                    {% else %}
+                        <em>Non renseigné</em>
+                    {% endif %}
+                </td>
+                <td>{{ r.grammage}}g</td>
+                <td>{{ r.commentaires}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

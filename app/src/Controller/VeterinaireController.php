@@ -7,6 +7,8 @@ use App\Entity\Animal;
 use App\Form\SoinType;
 use App\Repository\AnimalRepository;
 use App\Repository\SoinRepository;
+use App\Repository\RepasRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class VeterinaireController extends AbstractController
 {
     #[Route('/vet', name: 'vet_dashboard')]
-    public function index(AnimalRepository $animalRepository, EntityManagerInterface $em): Response
+    public function index(EntityManagerInterface $em): Response
     {
-        // $animaux = $animalRepository->findAll();
         $animaux = $em->getRepository(Animal::class)->findAll();
-
 
         return $this->render('main/vet/listAnimal.html.twig', [
             'animaux' => $animaux,
@@ -28,11 +28,15 @@ class VeterinaireController extends AbstractController
     }
 
     #[Route('/vet/animal/{id}', name: 'veterinaire_animal')]
-    public function showAnimal(Animal $animal, Request $request, EntityManagerInterface $em): Response
-    {
+    public function showAnimal(
+        Animal $animal,
+        Request $request,
+        EntityManagerInterface $em,
+        SoinRepository $soinRepository,
+        RepasRepository $repasRepository ): Response {
         $soin = new Soin();
         $soin->setAnimal($animal);
-        $soin->setUser($this->getUser()); // Assure-toi que le vétérinaire est connecté
+        $soin->setUser($this->getUser());
         $soin->setCreatedAt(new \DateTime());
 
         $form = $this->createForm(SoinType::class, $soin);
@@ -42,14 +46,19 @@ class VeterinaireController extends AbstractController
             $em->persist($soin);
             $em->flush();
 
-            $this->addFlash('success', 'Soin ajouté avec succès.');
+            $this->addFlash('successSoin', 'Soin ajouté avec succès.');
             return $this->redirectToRoute('veterinaire_animal', ['id' => $animal->getId()]);
-}
+        }
+
+        // 🔽 Tri direct par ID décroissant
+        $soins = $soinRepository->findBy(['animal' => $animal], ['id' => 'DESC']);
+        $repas = $repasRepository->findBy(['animal' => $animal], ['id' => 'DESC']);
 
         return $this->render('main/vet/animalSoin.html.twig', [
             'animal' => $animal,
             'form' => $form->createView(),
-            'soins' => $animal->getSoins(), // Assure-toi que la relation est bien définie dans l'entité Animal
+            'soins' => $soins,
+            'repas' => $repas,
         ]);
-}
+    }
 }

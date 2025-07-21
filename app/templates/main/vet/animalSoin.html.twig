@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}Fiche de Soin - {{ animal.prenom}}{% endblock %}
 {% block style %}
 <style>
 /* 🌿 Conteneur principal */
@@ -101,33 +102,91 @@
     color: #555;
 }
 
+.vet-history-columns {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.vet-column {
+    flex: 1;
+    background-color: #fdfdfd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.vet-column h2 {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.vet-repas-list {
+    list-style: none;
+    padding: 0;
+}
+
+.vet-repas-item {
+    background-color: #fff;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid #27ae60;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
 </style>
 {% endblock %}
 {% block body %}
-    <div class="vet-container">
-        <h1 class="vet-title">{{ animal.prenom}} - {{ animal.race}}</h1>
 
-        <section class="vet-form-section">
-            <h2 class="vet-subtitle">🩺 Ajouter un soin</h2>
-            {{ form_start(form)}}
-                {{ form_widget(form)}}
-                <button class="vet-btn">Ajouter</button>
-            {{ form_end(form)}}
-        </section>
+        {% for message in app.flashes('successSoin') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
 
-        <section class="vet-history-section">
-            <h2 class="vet-subtitle">📋 Historique des soins</h2>
+   <div class="vet-container">
+    <h1 class="vet-title">{{ animal.prenom}} - {{ animal.race}}</h1>
+
+    <section class="vet-form-section">
+        <h2 class="vet-subtitle">🩺 Ajouter un soin</h2>
+        {{ form_start(form)}}
+            {{ form_widget(form)}}
+            <button class="vet-btn">Ajouter</button>
+        {{ form_end(form)}}
+    </section>
+
+    <div class="vet-history-columns">
+        <!-- 📋 Historique des soins -->
+        <div class="vet-column">
+            <h2>📋 Soins</h2>
             <ul class="vet-soin-list">
                 {% for soin in soins %}
                     <li class="vet-soin-item">
-                        <strong>{{ animal.prenom}}</strong> a reçu le soin <strong>{{ soin.soin}}</strong>
-                        le <em>{{ soin.dateSoin|date('d/m/Y H:i')}}</em><br>
+                        <strong>{{ animal.prenom}}</strong> a reçu le soin <strong>{{ soin.soin}}</strong><br>
+                        <em>{{ soin.dateSoin|date('d/m/Y H:i')}}</em><br>
                         <span class="vet-comment">{{ soin.commentaires}}</span>
                     </li>
                 {% else %}
                     <li class="vet-soin-item">Aucun soin enregistré pour {{ animal.prenom}}.</li>
                 {% endfor %}
             </ul>
-        </section>
+        </div>
+
+        <!-- 🍽️ Historique des repas -->
+        <div class="vet-column">
+            <h2>🍽️ Repas</h2>
+            <ul class="vet-repas-list">
+                {% for r in repas %}
+                    <li class="vet-repas-item">
+                        <strong>{{ r.dateRepas|date('d/m/Y')}}</strong>:
+                        {{ r.grammage}}Kg par {{ r.user? r.user.nom: 'Inconnu'}}<br>
+                        <em>{{ r.commentaires}}</em>
+                    </li>
+                {% else %}
+                    <li class="vet-repas-item">Aucun repas enregistré.</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
+</div>
 {% endblock %}

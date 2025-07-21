@@ -30,13 +30,13 @@
 
         {% if is_granted('ROLE_EMPLOYE') %}
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ path('employe_tools')}}">Espace Employé</a>
+            <a class="nav-link text-white" href="{{ path('employe_dashboard')}}">Espace Employé</a>
           </li>
         {% endif %}
 
         {% if is_granted('ROLE_VETERINAIRE') %}
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ path('veto_portail')}}">Portail Vétérinaire</a>
+            <a class="nav-link text-white" href="{{ path('vet_dashboard')}}">Portail Vétérinaire</a>
           </li>
         {% endif %}
       </ul>
