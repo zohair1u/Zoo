@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RepasController extends AbstractController
 {
-    #[Route('/employe/animaux', name: 'employe_dashboard')]
+    #[Route('/employe', name: 'employe_dashboard')]
     public function index(AnimalRepository $animalRepository): Response
     {
         $animaux = $animalRepository->findAll(); // Tu peux filtrer par rôle/employé ici
