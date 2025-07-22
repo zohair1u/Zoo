@@ -27,7 +27,11 @@ final class MainController extends AbstractController
     public function indexHome(EntityManagerInterface $em,Request $request, DocumentManager $dm): Response
     {
 
-         $listAnimals = $em->getRepository(Animal::class)->findAll();
+       // Pour avoir 8 animaux différents à chaque fois :
+        $animals = $em->getRepository(Animal::class)->findAll();
+        shuffle($animals);
+        $randomAnimals = array_slice($animals, 0, 8);
+
          $listHabitats = $em->getRepository(Habitat::class)->findAll();
 
          // Les avis : 
@@ -47,7 +51,7 @@ final class MainController extends AbstractController
         $listeAvis = $dm->getRepository(Avis::class)->findBy([], ['createdAt' => 'DESC'], 6);
 
         return $this->render('\main\index.html.twig', [
-            "animals" => $listAnimals,
+            "animals" => $randomAnimals,
             "habitats" => $listHabitats,
             'form' => $form->createView(),
             'avis' => $listeAvis,

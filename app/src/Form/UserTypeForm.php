@@ -32,7 +32,16 @@ class UserTypeForm extends AbstractType
              //  'expanded' => false, 
              //'multiple' => true, 
 
-            ->add('password', PasswordType::class)
+            ->add('password', PasswordType::class, [
+             'constraints' => [
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                ]),
+             ],
+             'label' => 'Mot de passe',
+             'required' => true,
+             ])
             ->add('nom')
             ->add('prenom')
             ->add('Ajouter', SubmitType::class)
