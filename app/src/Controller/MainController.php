@@ -148,12 +148,18 @@ final class MainController extends AbstractController
     // PAGE CONTACT :
 
     #[Route('/contact', name: 'contact')]
-    public function contact(EntityManagerInterface $em): Response
+    public function contact(): Response
     {
-
-
         return $this->render('\main\contact.html.twig');
+    }
 
+
+    // PAGE MENTIONS :
+    
+    #[Route('/mentions', name: 'mentions')]
+    public function mentions(): Response
+    {
+        return $this->render('\main\mentions.html.twig');
     }
 
 }
