@@ -144,4 +144,16 @@ final class MainController extends AbstractController
 
         return $this->redirectToRoute('homepage');
     }
+
+    // PAGE CONTACT :
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(EntityManagerInterface $em): Response
+    {
+
+
+        return $this->render('\main\contact.html.twig');
+
+    }
+
 }
