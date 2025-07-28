@@ -14,6 +14,8 @@ class HabitatNameTest extends WebTestCase
         return \App\Kernel::class;
     }
 
+    // Test UNITAIRE :
+    
     public function testMain(): void
     {
         $client = static::createClient();
@@ -22,6 +24,9 @@ class HabitatNameTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'ZOO');
     }
+
+
+    // Test Foncionnelles :
 
         public function TeshHabitatPage(): void
     {
@@ -50,10 +55,10 @@ class HabitatNameTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // On suppose que l'URL de la liste des habitats est /habitats
+        // La page des habitats :
         $crawler = $client->request('GET', '/habitats');
 
-        // On clique sur le lien vers la page de l'habitat "Savane"
+        // On Clique le lien de l'habitat Savane :
         $link = $crawler->filter('.habitat-card:contains("Savane")')->link();
         $crawler = $client->click($link);
 
@@ -71,7 +76,7 @@ class HabitatNameTest extends WebTestCase
      {
         $client = static::createClient();
 
-        // On suppose que l'URL de la liste des habitats est /habitats
+        // On récupére le page des habitats :
         $crawler = $client->request('GET', '/habitats');
 
         $habitatNames = ['Montagnes', 'Savane', 'Forêt', 'Désert'];
@@ -89,7 +94,7 @@ class HabitatNameTest extends WebTestCase
         $this->assertEquals($habitatNames, $extractedNames);
 
         foreach ($habitatNames as $name) {
-            // On clique sur le lien vers la page de l'habitat
+            // On clique sur le lien vers la page de l'habitat en particulier :
             $crawler = $client->request('GET', '/habitats');
             $link = $crawler->filter('.habitat-card:contains("' . $name . '")')->link();
             $crawler = $client->click($link);
