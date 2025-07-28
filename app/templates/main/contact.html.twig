@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ZOO - Contact !{% endblock %}
+
+{% block style %}
+<style>
+:root {
+  --green-eco: #2e8b57;
+  --bamboo-yellow: rgba(155, 196, 85, 0.8); /* Vert citron doux */
+  --light-bg: #f6fdf7;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-bg);
+  color: #333;
+}
+
+/* 🌄 Bannière avec photo et titre centré */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-image: url('/images/zoo-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-banner h1 {
+  color: #333;
+  font-size: 3em;
+  padding: 14px 28px;
+  background-color: var(--bamboo-yellow);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 📱 Responsive header */
+@media (max-width: 600px) {
+.hero-banner {
+    height: 200px;
+}
+
+.hero-banner h1 {
+    font-size: 2em;
+    padding: 10px 16px;
+}
+}
+
+/* 📝 Sections */
+.form-section,.coords {
+  background-color: white;
+  padding: 25px;
+  max-width: 800px;
+  margin: 40px auto;
+  border: 2px solid var(--green-eco);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(46, 139, 87, 0.1);
+}
+
+/* 📋 Formulaire */
+form label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+button {
+  background-color: var(--green-eco);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #256d47;
+}
+
+/* 🗺️ Carte Google */
+iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* 📱 Responsive sections */
+@media (max-width: 600px) {
+.form-section,.coords {
+    padding: 18px;
+    margin: 20px;
+}
+}
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+  <header class="hero-banner">
+  <h1>Contactez le Zoo</h1>
+  </header>
+
+  <section class="form-section">
+    <h2>Envoyez-nous un message</h2>
+    <form method="post" action="/contact/send">
+      <label for="nom">Nom et Prénom:</label>
+      <input type="text" id="nom" name="nom" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+
+  <section class="coords">
+    <h2>Nos coordonnées</h2>
+    <p><strong>Adresse:</strong> ZOO, Bois de Vincennes, Paris</p>
+    <p><strong>Téléphone:</strong> +33 1 23 45 67 89</p>
+    <p><strong>Email:</strong> contact@zoo.com</p>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.299795452754!2d2.4144760000000005!3d48.83342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e672f4eab21383%3A0x70c3ddb088a9ebba!2sParc%20zoologique%20de%20Paris!5e0!3m2!1sfr!2sma!4v1753278700228!5m2!1sfr!2sma" 
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+{% endblock %}

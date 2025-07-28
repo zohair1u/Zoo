@@ -4,7 +4,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: passwordbdd
-      MYSQL_DATABASE: bdd-tp-agenda
+      MYSQL_DATABASE: zoo_bdd
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
     ports:
@@ -36,4 +36,10 @@ services:
       UPLOAD_LIMIT: 20M
     ports:
       - 8899:80
-      
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+    volumes:
+      - ./mongodb:/data/db    

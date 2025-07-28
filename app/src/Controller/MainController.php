@@ -5,10 +5,17 @@ namespace App\Controller;
 use App\Entity\Animal;
 use App\Entity\Habitat;
 use App\Entity\User;
+
+use App\Document\Avis;
+use App\Form\AvisType;
+use Doctrine\ODM\MongoDB\DocumentManager;
+
 use App\Form\UserTypeForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
@@ -17,15 +24,37 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class MainController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function indexHome(EntityManagerInterface $em): Response
+    public function indexHome(EntityManagerInterface $em,Request $request, DocumentManager $dm): Response
     {
 
-         $listAnimals = $em->getRepository(Animal::class)->findAll();
+       // Pour avoir 8 animaux différents à chaque fois :
+        $animals = $em->getRepository(Animal::class)->findAll();
+        shuffle($animals);
+        $randomAnimals = array_slice($animals, 0, 8);
+
          $listHabitats = $em->getRepository(Habitat::class)->findAll();
 
+         // Les avis : 
+        $avis = new Avis();
+        $form = $this->createForm(AvisType::class, $avis);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dm->persist($avis);
+            $dm->flush();
+
+            $this->addFlash('successAvis', 'Merci pour votre avis!');
+            return $this->redirectToRoute('home');
+        }
+
+        $listeAvis = $dm->getRepository(Avis::class)->findBy([], ['createdAt' => 'DESC'], 6);
+
         return $this->render('\main\index.html.twig', [
-            "animals" => $listAnimals,
-            "habitats" => $listHabitats
+            "animals" => $randomAnimals,
+            "habitats" => $listHabitats,
+            'form' => $form->createView(),
+            'avis' => $listeAvis,
         ]);
 
     }
@@ -47,7 +76,7 @@ final class MainController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        $this->addFlash('success', 'Utilisateur créé avec succès.');
+        $this->addFlash('successAdmin', 'Utilisateur créé avec succès.');
         return $this->redirectToRoute('users');
     }
 
@@ -95,6 +124,7 @@ final class MainController extends AbstractController
     } 
 
 //Redirection en fonction de type de l'utilisateur :
+
     #[Route('/apres-connexion', name: 'apres_connexion')]
     public function redirectionPostLogin(): Response
     {
@@ -109,9 +139,27 @@ final class MainController extends AbstractController
     }
 
         if (in_array('ROLE_VETERINAIRE', $user->getRoles(), true)) {
-            return $this->redirectToRoute('veterinaire_dashboard');
+            return $this->redirectToRoute('vet_dashboard');
     }
 
         return $this->redirectToRoute('homepage');
     }
+
+    // PAGE CONTACT :
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('\main\contact.html.twig');
+    }
+
+
+    // PAGE MENTIONS :
+    
+    #[Route('/mentions', name: 'mentions')]
+    public function mentions(): Response
+    {
+        return $this->render('\main\mentions.html.twig');
+    }
+
 }
