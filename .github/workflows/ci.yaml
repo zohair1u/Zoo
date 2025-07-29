@@ -21,6 +21,8 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_USER: symfony
+          MYSQL_PASSWORD: symfony
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: zoo_bdd_test
         ports:
@@ -33,7 +35,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: 🧱 Set up PHP
         uses: shivammathur/setup-php@v2
