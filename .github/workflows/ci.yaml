@@ -65,4 +65,4 @@ jobs:
 
       - name: ✅ Run PHPUnit tests
         working-directory: ./app
-        run: ./bin/phpunit
+        run: ./vendor/bin/phpunit
