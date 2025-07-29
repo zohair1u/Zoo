@@ -43,11 +43,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, pdo, pdo_mysql, mysqli
+          extensions: mbstring, pdo, pdo_mysql, mysqli, xml, ctype, iconv, intl, dom
           coverage: none
 
       - name: 🛠️ Install Composer dependencies
-        run: composer install 
+        working-directory: ./app
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist 
 
       - name: 🗃️ Wait for MySQL
         run: |
