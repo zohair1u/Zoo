@@ -1,14 +1,27 @@
-/* pages Habitat + Animaux : */
+:root {
+  --color-primary: #3E8E41;
+  --color-secondary: #6bbf59;
+  --color-accent: #2E6E31;
+  --form-bg: #dff0ea;
+  --form-bg-alt: #d8f3dc;
+  --title-color: #2d6a4f;
+  --label-color: #1b4332;
+  --text-light: #f0f4f8;
+  --text-dark: #333;
+  --text-muted: #3b3b3b;
+}
+
+/* Page Habitat + Animaux */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background-color: #f0f4f8;
-  color: #333;
+  background-color: var(--text-light);
+  color: var(--text-dark);
 }
 
 /* Carte Habitat */
 .habitat-card {
-  background-color: #dff0ea;
+  background-color: var(--form-bg);
   padding: 30px;
   text-align: center;
   max-width: 1320px;
@@ -19,7 +32,7 @@ body {
 
 .habitat-title {
   font-size: 2.4em;
-  color: #2d6a4f;
+  color: var(--title-color);
   margin-bottom: 25px;
 }
 
@@ -33,7 +46,7 @@ body {
 
 .habitat-description {
   font-size: 1.4em;
-  color: #3b3b3b;
+  color: var(--text-muted);
   text-align: justify;
   line-height: 1.6em;
   margin: 0 auto;
@@ -48,7 +61,7 @@ body {
 
 .animals-title {
   font-size: 2em;
-  color: #1b4332;
+  color: var(--label-color);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -62,7 +75,7 @@ body {
 
 /* Cartes animaux agrandies */
 .animal-card {
-  background-color: #d8f3dc;
+  background-color: var(--form-bg-alt);
   width: 288px;
   height: 497px;
   padding: 20px;
@@ -84,7 +97,7 @@ body {
 .animal-info {
   margin-top: 20px;
   font-size: 1.2em;
-  color: #2d6a4f;
+  color: var(--title-color);
   line-height: 1.4em;
 }
 

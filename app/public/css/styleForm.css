@@ -1,8 +1,21 @@
+:root {
+  --color-primary: #3E8E41;
+  --color-secondary: #6bbf59;
+  --color-accent: #2E6E31;
+  --form-bg: #dff0ea;
+  --form-border: #a3c9a8;
+  --form-light: #f6fff9;
+  --form-text: #333;
+  --title-color: #2d6a4f;
+  --label-color: #1b4332;
+  --link-color: #3b3b3b;
+}
+
 /* Conteneur principal */
 .ajouter {
   max-width: 600px;
   margin: 40px auto;
-  background-color: #dff0ea;
+  background-color: var(--form-bg);
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -12,7 +25,7 @@
 /* Titre principal */
 .ajout {
   text-align: center;
-  color: #2d6a4f;
+  color: var(--title-color);
   font-size: 2em;
   margin-bottom: 20px;
 }
@@ -25,7 +38,7 @@ form.form-group {
 form label {
   display: block;
   font-weight: 600;
-  color: #1b4332;
+  color: var(--label-color);
   margin-bottom: 6px;
 }
 
@@ -35,10 +48,10 @@ form select {
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #a3c9a8;
-  background-color: #f6fff9;
+  border: 1px solid var(--form-border);
+  background-color: var(--form-light);
   font-size: 1em;
-  color: #333;
+  color: var(--form-text);
   box-sizing: border-box;
 }
 
@@ -46,14 +59,14 @@ form input[type="text"]:focus,
 form input[type="file"]:focus,
 form select:focus {
   outline: none;
-  border-color: #2d6a4f;
+  border-color: var(--title-color);
   box-shadow: 0 0 5px rgba(45, 106, 79, 0.3);
 }
 
 /* Bouton d'ajout */
 form button,
 form input[type="submit"] {
-  background-color: #2d6a4f;
+  background-color: var(--title-color);
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -66,7 +79,7 @@ form input[type="submit"] {
 
 form button:hover,
 form input[type="submit"]:hover {
-  background-color: #1b4332;
+  background-color: var(--label-color);
 }
 
 /* Lien de retour */
@@ -74,11 +87,11 @@ div h3 {
   text-align: center;
   font-size: 1.1em;
   margin-top: 40px;
-  color: #3b3b3b;
+  color: var(--link-color);
 }
 
 div h3 a {
-  color: #2d6a4f;
+  color: var(--title-color);
   font-weight: 600;
   text-decoration: none;
 }

@@ -25,6 +25,7 @@ services:
       - ./app:/var/www
     depends_on:
       - database
+      - mongodb
   phpma:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -40,6 +41,6 @@ services:
     container_name: mongodb
     image: mongo:latest
     ports:
-      - '27018:27017'
+      - '27017:27017'
     volumes:
       - ./mongodb:/data/db    

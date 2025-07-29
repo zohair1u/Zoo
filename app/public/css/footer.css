@@ -1,23 +1,35 @@
-/* LOGO */
+:root {
+  --color-primary: #3E8E41;
+  --color-secondary: #6bbf59;
+  --color-accent: #2E6E31;
 
+  --logo-bg: #53A57F;
+  --footer-bg: #e6f2e6;
+  --footer-text: #2e4d2e;
+  --footer-border: #a3c293;
+  --footer-title: #3b5e3b;
+  --footer-muted: #4a6b4a;
+  --footer-divider: #c8dbc8;
+}
+
+/* LOGO */
 .logo-zoo {
-  width: 60px;             
+  width: 60px;
   height: 60px;
-  border-radius: 50%;      
+  border-radius: 50%;
   object-fit: cover;
-  background-color: #53A57F;  
+  background-color: var(--logo-bg);
   padding: 4px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 /* FOOTER */
-
 .zoo-footer {
-  background-color: #e6f2e6;
-  color: #2e4d2e;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   font-family: 'Segoe UI', sans-serif;
   padding: 3rem 2rem 2rem;
-  border-top: 4px solid #a3c293;
+  border-top: 4px solid var(--footer-border);
 }
 
 .footer-content {
@@ -40,20 +52,20 @@
 }
 
 .footer-section.contact {
-  margin-left: auto; /* pousse la div à droite */
+  margin-left: auto;
   text-align: right;
 }
 
 .footer-section h4 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  color: #3b5e3b;
+  color: var(--footer-title);
 }
 
 .footer-section p,
 .footer-section a {
   margin: 0.5rem 0;
-  color: #2e4d2e;
+  color: var(--footer-text);
   text-decoration: none;
   font-size: 1rem;
 }
@@ -78,16 +90,15 @@
   text-align: center;
   margin-top: 3rem;
   font-size: 0.95rem;
-  border-top: 1px solid #c8dbc8;
+  border-top: 1px solid var(--footer-divider);
   padding-top: 1.5rem;
-  color: #4a6b4a;
+  color: var(--footer-muted);
 }
 
 .footer-bottom a {
-  color: #4a6b4a;
+  color: var(--footer-muted);
   margin-right: 1rem;
 }
-
 
 /* ✅ Responsive */
 @media (max-width: 768px) {
@@ -108,5 +119,3 @@
     margin: 0 0.5rem;
 }
 }
-
-
