@@ -80,13 +80,21 @@ GitHub Actions : CI/CD
 
 
 app/
+
 ├── config/
+
 ├── src/
-│   ├── Controller/
-│   ├── Entity/
-│   ├── Repository/
+
+│      ├── Controller/
+
+│      ├── Entity/
+
+│      ├── Repository/
+
 ├── templates/
+
 ├── tests/
+
 └── public/
 
 
