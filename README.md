@@ -33,16 +33,23 @@ cp.env.env.local
 
 
 Modifiez les variables selon votre environnement:
+
 env
+
 DATABASE_URL="mysql://symfony:symfony@127.0.0.1:3306/zoo_bdd"
+
 MONGODB_URL="mongodb://127.0.0.1:27017"
+
 
 
 *Création de la base de données*
 
 bash
+
 php bin/console doctrine:database:create
+
 php bin/console doctrine:schema:update --force
+
 php bin/console doctrine:fixtures:load
 
 
