@@ -98,6 +98,7 @@ class HabitatNameTest extends WebTestCase
             $crawler = $client->request('GET', '/habitats');
             $link = $crawler->filter('.habitat-card:contains("' . $name . '")')->link();
             $crawler = $client->click($link);
+            $this->assertResponseIsSuccessful();
 
             // On vérifie que le titre de la page est bien "Habitat : $name"
             $this->assertEquals('Habitat : ' . $name, $crawler->filter('.habitat-title')->text());
