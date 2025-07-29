@@ -24,11 +24,13 @@ cd zoo/app
 composer install
 
 
-*Configuration*
+### *Configuration*
 
 Copiez le fichier `.env` ou `.env.local`:
 
+
 bash
+
 cp.env.env.local
 
 
