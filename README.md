@@ -17,8 +17,10 @@ Bienvenue sur **ZOO**, une application Symfony destinée à gérer les animaux, 
 ### Cloner le projet
 
 bash
-git clone https://github.com/ton-utilisateur/zoo.git
+git clone https://github.com/zohair1u/Zoo.git
+
 cd zoo/app
+
 composer install
 
 
