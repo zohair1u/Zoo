@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout Habitat{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/styleForm.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class ='container'>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+<div class="ajouter">
+    <h1 class ="ajout">Ajouter Habitat</h1>
+
+    {{ form_start(habitatForm)}}
+    {{ form_row(habitatForm.nom) }}
+    {{ form_row(habitatForm.image, {
+        attr: {'required': 'required'},
+        label: 'Image'
+        })
+    }}
+    {{ form_row(habitatForm.description) }}
+    {{ form_row(habitatForm.Ajouter, {
+        label: 'Ajouter Habitat'
+        })
+    }}
+    {{ form_end(habitatForm)}}
+
+
+  
+</div>
+{% endblock %}

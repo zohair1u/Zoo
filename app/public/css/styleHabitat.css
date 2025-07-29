@@ -1,0 +1,84 @@
+/* Page Habitats */
+.habitats-section {
+  padding: 3rem 2rem;
+  color: #2e4d2e;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.habitats-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #3b5e3b;
+}
+
+.habitats-section.intro {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.habitat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.habitat-card {
+  width: 48%; /* ✅ Deux cartes par ligne avec un peu d'espace entre */
+  max-width: 600px;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.habitat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.habitat-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  height: 240px;
+}
+
+.habitat-name {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2e4d2e;
+  background-color: #e6f2e6;
+}
+
+/* ✅ Responsive: 1 carte par ligne sur mobile */
+@media (max-width: 768px) {
+.habitat-card {
+    width: 100%;
+    height: auto;
+}
+
+.habitat-image {
+    height: 200px;
+}
+
+.habitat-name {
+    height: auto;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+}
+
+

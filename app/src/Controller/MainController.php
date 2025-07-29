@@ -1,0 +1,165 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Animal;
+use App\Entity\Habitat;
+use App\Entity\User;
+
+use App\Document\Avis;
+use App\Form\AvisType;
+use Doctrine\ODM\MongoDB\DocumentManager;
+
+use App\Form\UserTypeForm;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+final class MainController extends AbstractController
+{
+    #[Route('/', name: 'home')]
+    public function indexHome(EntityManagerInterface $em,Request $request, DocumentManager $dm): Response
+    {
+
+       // Pour avoir 8 animaux différents à chaque fois :
+        $animals = $em->getRepository(Animal::class)->findAll();
+        shuffle($animals);
+        $randomAnimals = array_slice($animals, 0, 8);
+
+         $listHabitats = $em->getRepository(Habitat::class)->findAll();
+
+         // Les avis : 
+        $avis = new Avis();
+        $form = $this->createForm(AvisType::class, $avis);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dm->persist($avis);
+            $dm->flush();
+
+            $this->addFlash('successAvis', 'Merci pour votre avis!');
+            return $this->redirectToRoute('home');
+        }
+
+        $listeAvis = $dm->getRepository(Avis::class)->findBy([], ['createdAt' => 'DESC'], 6);
+
+        return $this->render('\main\index.html.twig', [
+            "animals" => $randomAnimals,
+            "habitats" => $listHabitats,
+            'form' => $form->createView(),
+            'avis' => $listeAvis,
+        ]);
+
+    }
+
+    #[Route('/admin/users', name: 'users')]
+    public function createUser(HttpFoundationRequest $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    {
+    $user = new User();
+    $form = $this->createForm(UserTypeForm::class, $user);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+        $user->setPassword($hashedPassword);
+        // Pour transformer le string en tableau mais j'ai réglé le souci sur le UserForm directement :
+        // $user->setRoles([$form->get('roles')->getData()]);
+        $user->setCreatedAt(new \DateTime());
+        $user->setUpdatedAt(null);
+        $em->persist($user);
+        $em->flush();
+
+        $this->addFlash('successAdmin', 'Utilisateur créé avec succès.');
+        return $this->redirectToRoute('users');
+    }
+
+    return $this->render('main/admin/createUser.html.twig', [
+        'form' => $form->createView(),
+    ]);
+    }
+
+    #[Route('/admin', name: 'dashboard')]
+    public function indexAdmin(): Response
+    {
+        return $this->render('main/admin/dashboard.html.twig');
+    }
+
+//Redirection vers la pages des habitats : 
+    #[Route('/habitats', name: 'habitats')]
+    public function indexHabitat(EntityManagerInterface $em): Response
+    {
+
+         $listHabitats = $em->getRepository(Habitat::class)->findAll();
+
+        return $this->render('\main\habitat.html.twig', [
+            "habitats" => $listHabitats
+        ]);
+
+    }
+
+// Redirection vers la page d'un habitat avec les animaux concernés : 
+
+    #[Route('/animals/{id}', name: 'animals')]
+    public function indexAnimal(EntityManagerInterface $em, $id): Response
+    {
+        $habitat = $em->getRepository(Habitat::class)->find($id);
+
+        if (!$habitat) {
+            throw $this->createNotFoundException('Habitat non trouvé.');
+    }
+
+        $listAnimals = $habitat->getAnimals(); // Accès direct via la relation
+
+        return $this->render('main/animal.html.twig', [
+            'animals' => $listAnimals,
+            'habitat' => $habitat,
+        ]);
+    } 
+
+//Redirection en fonction de type de l'utilisateur :
+
+    #[Route('/apres-connexion', name: 'apres_connexion')]
+    public function redirectionPostLogin(): Response
+    {
+        $user = $this->getUser();
+
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+            return $this->redirectToRoute('dashboard');
+    }
+
+        if (in_array('ROLE_EMPLOYE', $user->getRoles(), true)) {
+            return $this->redirectToRoute('employe_dashboard');
+    }
+
+        if (in_array('ROLE_VETERINAIRE', $user->getRoles(), true)) {
+            return $this->redirectToRoute('vet_dashboard');
+    }
+
+        return $this->redirectToRoute('homepage');
+    }
+
+    // PAGE CONTACT :
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('\main\contact.html.twig');
+    }
+
+
+    // PAGE MENTIONS :
+    
+    #[Route('/mentions', name: 'mentions')]
+    public function mentions(): Response
+    {
+        return $this->render('\main\mentions.html.twig');
+    }
+
+}

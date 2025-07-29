@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animaux{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+
+{% set flashTypes = ['deleted', 'edited'] %}
+
+{% for type in flashTypes %}
+    {% for message in app.flashes(type) %}
+        <div class="alert alert-success">
+            {{ message}}
+        </div>
+    {% endfor %}
+{% endfor %}
+    
+<div class="example-wrapper">
+
+  <h1>Liste des animaux</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Image</th>
+        <th scope="col">Race</th>
+        <th scope="col">Etat</th>
+        <th scope="col">Habitat</th>      
+        <th scope="col">Date d'entrée</th>
+        <th scope="col">Dernière modification</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for animal in animals %}
+        <tr>
+          <th>{{ animal.id }} </th>
+          <td> {{ animal.prenom }}</td>
+          <td>      <img width=200 src="\uploads\animals\{{ animal.image }}" alt="IMG_Habitat"> </td>
+          <td>{{ animal.race }}</td>
+          <td>{{ animal.etat }}</td>
+          <td>{{ animal.habitat.nom }}</td>
+          <td>{{ animal.createdAt? animal.createdAt|date('d/m/Y H:i'): 'Non défini'}}</td>
+          <td>{{ animal.updatedAt? animal.updatedAt|date('d/m/Y H:i'): 'Non défini'}}</td>
+          <td> 
+            <a href="{{ path('edit_animal', {paramId: animal.id}) }}" type="button" class="btn btn-warning">Modifier</a>  
+            <a href="{{ path('supp_animal', {paramId: animal.id})}}"
+            class="btn btn-danger"
+            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet animal?');">
+            Supprimer
+            </a>
+          </td>      
+        </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+  
+</div>
+
+<div>
+
+<h4>Pour rajouter un nouveau ANIMAL <a href="{{ path('animal_new') }}">Cliquez-ici</a></h4>
+
+</div>
+
+</div>
+
+ 
+{% endblock %}
+
