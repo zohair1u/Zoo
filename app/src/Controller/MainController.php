@@ -162,4 +162,12 @@ final class MainController extends AbstractController
         return $this->render('\main\mentions.html.twig');
     }
 
+
+    // PAGE API : 
+    #[Route('/faitAnimal', name: 'api')]
+    public function API(): Response
+    {
+        return $this->render('\api\api.html.twig');
+    }
+
 }

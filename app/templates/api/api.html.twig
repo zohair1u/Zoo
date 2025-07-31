@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fait Amusant{% endblock %}
+
+{% block style %}
+<style>
+    .body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f7;
+      text-align: center;
+      padding: 2em;
+    }
+    .btnC {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #fact {
+      margin-top: 2em;
+      font-size: 1.2em;
+      color: #333;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class='body'>
+   <h1>🐾 Fun Cat Fact</h1>
+  <button class='btnC' onclick="getFact()">🎲 Générer un fait amusant</button>
+  <div id="fact">Clickez sur le bouton pour lire un fait amusant !</div>
+</div>
+
+  <script>
+    function getFact() {
+      fetch("https://meowfacts.herokuapp.com/")
+      .then(response => response.json())
+      .then(response => {
+        const fact = response.data[0];
+        document.getElementById("fact").textContent = fact;
+        })
+      .catch(error => alert("Erreur: " + error));
+    } 
+  </script>
+
+{% endblock %}
+

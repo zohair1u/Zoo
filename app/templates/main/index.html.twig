@@ -13,6 +13,18 @@
                 </div>
             {% endfor %}
 
+<div id="popup" class="popup-container">
+  <div class="popup-box">
+    <p>
+      🚫 Ce site <strong>n'utilise aucun cookie</strong> de suivi.<br>
+      ✅ Les données que vous nous transmettez pour nous contacter ou laisser un avis sont utilisées uniquement pour améliorer votre expérience.<br>
+      🔒 Aucune information n'est revendue ou partagée.
+    </p>
+    <button onclick="closePopup()">J'ai compris</button>
+  </div>
+</div>
+
+
 <div class="zoo-header">
   <h1>ZOO</h1>
   <h2>Découvrez notre nouveau ZOO entièrement écologique</h2>
@@ -65,6 +77,7 @@
 
     <div class="habitat-button-container">
          <a href="{{path('habitats')}}" class="btn-ecologie caroussel-habitat">Plus d'amis</a>
+         <a href="{{path('api')}}" class="btn-ecologie caroussel-habitat">Histoire Fun de nos amis</a>
     </div>    
 </section>
 

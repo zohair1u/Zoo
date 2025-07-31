@@ -29,6 +29,36 @@
   100% { opacity: 0; transform: translateY(-10px);}
 }
 
+
+/* PopUP Coockies : */
+
+.popup-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+}
+.popup-box {
+    background-color: #eafbe0;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    font-family: sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.popup-box button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .zoo-header {
   text-align: center;
   margin-top: 50px;
@@ -104,6 +134,10 @@
 .habitat-button-container {
   text-align: center;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Arrange verticalement */
+  gap: 10px; /* Espacement entre les boutons */
+  align-items: center; /* Centre horizontalement les boutons */
 }
 
 .caroussel-habitat {

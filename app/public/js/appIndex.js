@@ -67,3 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000); // correspond à la durée de l'animation
         }
     });
+
+
+// PopUP Coockies : 
+
+ function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    }
+    // Affiche la popup après 1 seconde
+    window.onload = function() {
+        setTimeout(() => {
+        document.getElementById("popup").style.display = "flex";
+    }, 1000);
+};
