@@ -40,7 +40,7 @@ Interface d'administration permettant de gérer facilement les entités du zoo (
 
 Avant de pouvoir lancer le projet en local, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-- PHP 8.2+ : Symfony nécessite PHP pour fonctionner. Assurez-vous d'avoir une version compatible de PHP installée.
+- PHP 8.2 : Symfony nécessite PHP pour fonctionner. Assurez-vous d'avoir une version compatible de PHP installée.
 - Composer : Outil de gestion des dépendances PHP, utilisé pour installer les dépendances du projet.
 - Installation de Composer : https://getcomposer.org/download/
 - MySQL : Base de données relationnelle utilisée pour le projet.
@@ -54,7 +54,7 @@ Avant de pouvoir lancer le projet en local, assurez-vous d'avoir les outils suiv
 ## Installation
 ### 🔽 Cloner le projet
 
-``` git clone https://github.com/Baylox/zooArcadia.git ```
+``` git clone https://github.com/zohair1u/Zoo.git ```
 
 Aller dans le répertoire du projet
 
