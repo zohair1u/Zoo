@@ -26,7 +26,7 @@ Interface d'administration permettant de gérer facilement les entités du zoo (
 - Bootstrap / CSS (Pour le design et la mise en page responsive)
 
 ### Server (Back-End) :
-- Symfony 7.3 (LTS) (Framework PHP)
+- Symfony 7.3 (Framework PHP)
 - Doctrine ORM (Pour la gestion de la base de données)
 
 ### Base de données :
