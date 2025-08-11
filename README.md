@@ -9,7 +9,7 @@ Conçu pour des objectifs pédagogiques, ce projet a été pensé pour offrir un
 Offrir une plateforme complète pour la gestion des animaux, habitats, espèces et services du zoo.
 Permettre aux visiteurs de laisser des avis et consulter les services disponibles.
 Créer un système sécurisé de gestion des rôles et des permissions pour les administrateurs et les employés du zoo.
-Fournir une interface front-end responsive et adaptée aux appareils mobiles, grâce à l'utilisation de Bootstrap et SCSS.
+Fournir une interface front-end responsive et adaptée aux appareils mobiles, grâce à l'utilisation de Bootstrap et CSS.
 
 🚀 Principales fonctionnalités :
 
