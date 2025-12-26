@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% endblock %}
+{% block style %}
+<style>
+:root {
+  --green-eco: #2e8b57;
+  --light-bg: #f6fdf7;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* 🟩 Bannière en haut de page */
+.legal-banner {
+  background-color: var(--green-eco);
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.legal-banner h1 {
+  font-size: 2.8em;
+  margin: 0;
+}
+
+/* 📜 Contenu légal */
+.legal-content {
+  background-color: white;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 2px solid var(--green-eco);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(46, 139, 87, 0.1);
+}
+
+.legal-content h2 {
+  color: var(--green-eco);
+  margin-top: 30px;
+}
+
+.legal-content p {
+  line-height: 1.6;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+.legal-banner h1 {
+    font-size: 2em;
+}
+
+.legal-content {
+    padding: 20px;
+    margin: 20px;
+}
+}
+</style>
+{% endblock %}
+{% block body %}
+  <header class="legal-banner">
+    <h1>Mentions Légales</h1>
+  </header>
+
+  <section class="legal-content">
+    <h2>Éditeur du site</h2>
+    <p>
+      <strong>ZOO</strong><br>
+      ZOO, Bois de Vincennes, Paris<br>
+      Téléphone: +33 1 23 45 67 89<br>
+      Email: contact@zoo.com
+    </p>
+
+    <h2>Responsable de la publication</h2>
+    <p>
+      Zohair Leo MESSI, Directeur du Zoo - Contact : Zohair@zoo.com
+    </p>
+
+    <h2>Hébergement</h2>
+    <p>
+      Serveurs hébergés par <strong>GreenHost</strong><br>
+      Site Web: <a href="https://www.greenhost.com" target="_blank">www.greenhost.com</a>
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L’ensemble des contenus (textes, photos, vidéos, logos...) présents sur ce site sont la propriété exclusive du <strong>Zoo</strong> sauf mention contraire. Toute reproduction est interdite sans autorisation préalable.
+    </p>
+
+    <h2>Cookies & données personnelles</h2>
+    <p>
+      Ce site peut utiliser des cookies à des fins de mesure d’audience. Vos données ne sont jamais revendues et sont uniquement utilisées pour améliorer l’expérience utilisateur.
+    </p>
+
+    <h2>Responsabilité</h2>
+    <p>Zoo met tout en œuvre pour assurer l’exactitude des informations publiées sur ce site, mais ne saurait être tenu responsable des erreurs ou omissions, ni d’une mauvaise utilisation des informations fournies.
+    </p>
+</section>
+{% endblock %}

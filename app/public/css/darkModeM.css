@@ -1,0 +1,38 @@
+:root {
+  /* Thème clair */
+  --color-background: #f0f4f8;
+  --color-text: #333;
+
+  /* Thème sombre */
+  --dark-background: #1e1e1e;
+  --dark-text: #f5f5f5;
+  --dark-main-bg: #2e2e2e;
+  --dark-main-text: #f0f0f0;
+  --dark-navbar-bg: #2b5949;
+}
+
+/* CSS de base (light mode) */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: var(--dark-background);
+  color: var(--dark-text);
+}
+
+body.dark-mode main {
+  background-color: var(--dark-main-bg);
+  color: var(--dark-main-text);
+}
+
+.navbar.dark-mode {
+  background-color: var(--dark-navbar-bg)!important;
+}
+
+.card.dark-mode {
+  background-color: var(--dark-main-bg);
+  color: var(--dark-main-text);
+}

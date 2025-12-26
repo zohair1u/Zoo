@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ asset('css/styleIndex.css')}}">
+{% endblock %}
+
+{% block body %}
+
+
+
+<h2 class='avis-titre'>TEMOIGNAGES</h2>
+
+    <div class="avis-section">
+     <div class="avis-list">
+            {% for a in avis %}
+                <div class="avis-card">
+                    <h3>{{ a.username}}</h3>
+                    <div class="note">
+                        {% for i in 1..a.note %}
+                            ⭐
+                        {% endfor %}
+                    </div>
+                    <p>{{ a.message}}</p>
+                    <div class="date">{{ a.createdAt|date('d/m/Y')}}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
+
+{% endblock %}

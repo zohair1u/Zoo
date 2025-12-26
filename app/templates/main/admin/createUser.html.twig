@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout Animal{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/styleForm.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+
+        {% for message in app.flashes('successAdmin') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+    <div class="ajouter">
+        <h1 class='ajout'>Ajouter un utilisateur</h1>
+
+        {{ form_start(form)}}
+            
+        {{ form_end(form)}}
+
+    </div>
+
+</div>    
+{% endblock %}

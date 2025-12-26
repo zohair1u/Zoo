@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Habitat{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/styleForm.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="ajouter">
+        <h1 class ='ajout'>Modifier Habitat</h1>
+
+        {{ form_start(formEdit)}}
+        {{ form_row(formEdit.nom) }}
+        {{ form_row(formEdit.image, {
+            attr: {'required': 'required'},
+            label: 'Image'
+            })
+        }}
+        {{ form_row(formEdit.description) }}
+        {{ form_row(formEdit.Ajouter, {
+            label: 'Appliquer la modification'
+            })
+        }}
+        {{ form_end(formEdit)}}
+
+    </div>
+
+    <div>
+    <h3>Retour vers la liste des habitats par <a href="{{ path('habitat_admin') }}">ici</a></h3>
+    </div>
+
+</div>
+{% endblock %}
+
+

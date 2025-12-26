@@ -1,0 +1,78 @@
+name: CI Symfony + PHPUnit
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - test
+      - 'feature/**'
+  # pull_request:
+  #   branches: 
+  #     - main
+  #     - dev
+  #     - test
+  #     - 'feature/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_USER: symfony
+          MYSQL_PASSWORD: symfony
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: zoo_bdd_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+      mongo:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1})'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🧱 Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql, mysqli, xml, ctype, iconv, intl, dom, mongodb
+          coverage: none
+
+      - name: 🛠️ Install Composer dependencies
+        working-directory: ./app
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist 
+
+      - name: 🗃️ Wait for MySQL
+        run: |
+          until mysqladmin ping -h 127.0.0.1 -uroot -proot --silent; do
+            echo "Waiting for MySQL..."
+            sleep 3
+          done
+
+      - name: ⚙️ Run Symfony Console Commands (exemple -> migrations, fixtures...)
+        working-directory: ./app
+        run: |
+          php bin/console doctrine:schema:create --env=test
+          php bin/console doctrine:fixtures:load --no-interaction --env=test || true
+
+      - name: ✅ Run PHPUnit tests
+        working-directory: ./app
+        run: ./vendor/bin/phpunit

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Habitat - {{ habitat.nom }}{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ asset('css/styleAnimal.css')}}">
+{% endblock %}
+
+{% block body %}
+
+  <div class="habitat-card">
+    <h1 class="habitat-title">Habitat : {{ habitat.nom }}</h1>
+    <img src="\uploads\habitats\{{ habitat.image }}" alt="{{ habitat.nom }}" class="habitat-image">
+    <p class="habitat-description">
+        {{ habitat.description }}
+    </p>
+  </div>
+
+  <div class="animals-section">
+    <h2 class="animals-title">NOS AMIS LES ANIMAUX</h2>
+    <div class="animal-list">
+        {% for animal in animals %}
+        <div class="animal-card">
+            <img src="\uploads\animals\{{ animal.image}}" alt="{{ animal.prenom}}" class="animal-photo">
+            <div class="animal-info">
+                <strong>{{ animal.prenom}}</strong><br>
+                {{ animal.race}}
+            </div>
+        </div>
+        {% else %}
+            <p>Aucun animal n'est dans cet habitat.</p>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}

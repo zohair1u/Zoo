@@ -1,0 +1,121 @@
+:root {
+  --color-primary: #3E8E41;
+  --color-secondary: #6bbf59;
+  --color-accent: #2E6E31;
+
+  --logo-bg: #53A57F;
+  --footer-bg: #e6f2e6;
+  --footer-text: #2e4d2e;
+  --footer-border: #a3c293;
+  --footer-title: #3b5e3b;
+  --footer-muted: #4a6b4a;
+  --footer-divider: #c8dbc8;
+}
+
+/* LOGO */
+.logo-zoo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--logo-bg);
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* FOOTER */
+.zoo-footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  font-family: 'Segoe UI', sans-serif;
+  padding: 3rem 2rem 2rem;
+  border-top: 4px solid var(--footer-border);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 4rem;
+  position: relative;
+}
+
+.footer-section {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+
+.footer-section.hours {
+  margin-left: 0;
+}
+
+.footer-section.contact {
+  margin-left: auto;
+  text-align: right;
+}
+
+.footer-section h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--footer-title);
+}
+
+.footer-section p,
+.footer-section a {
+  margin: 0.5rem 0;
+  color: var(--footer-text);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+.socials {
+  margin-top: 0.8rem;
+}
+
+.socials img {
+  width: 28px;
+  height: 28px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  filter: brightness(0) saturate(100%) invert(28%) sepia(18%) saturate(749%) hue-rotate(66deg) brightness(95%) contrast(92%);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  border-top: 1px solid var(--footer-divider);
+  padding-top: 1.5rem;
+  color: var(--footer-muted);
+}
+
+.footer-bottom a {
+  color: var(--footer-muted);
+  margin-right: 1rem;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+.footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-section {
+    width: 100%;
+    max-width: 400px;
+    text-align: center!important;
+    margin-left: 0!important;
+}
+
+.socials img {
+    margin: 0 0.5rem;
+}
+}
